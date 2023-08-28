@@ -6,7 +6,7 @@ class Solution {
                 answer = (answer==1)? 1:0;
                 break;
             }else if(date1[i]==date2[i]){
-                answer = (answer==1)? 1:0;
+                answer = 0;
             }else{
                 answer =1;
             }
