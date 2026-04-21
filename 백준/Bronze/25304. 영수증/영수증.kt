@@ -1,17 +1,2 @@
-fun main(args: Array<String>) = with(System.`in`.bufferedReader()) {
-    
-    val totalPrice = readLine().toInt()
-    val count = readLine()
-    var result = 0 
-    for (i in 0 until count.toInt()) {
-
-        val input = readLine().split(" ")
-        result += input[0].toInt()*input[1].toInt()
-    }
-    
-    if(result == totalPrice){
-        println("Yes")
-    } else {
-        println("No")
-    }
-}
+val v get()=readln().split(' ').map{it.toInt()}
+fun main()=print(if(v[0]==List(v[0]){v}.sumOf{(i,j)->i*j})"Yes" else "No")
