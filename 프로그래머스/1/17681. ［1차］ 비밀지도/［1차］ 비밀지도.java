@@ -3,18 +3,10 @@ class Solution {
         String[] answer = new String[n];
         
         for(int i =0 ; i< n ;i++){
-            int temp = arr1[i]|arr2[i];
-            
-            StringBuilder sb = new StringBuilder();
-            for(int k = 0 ; k<n;k++){
-                if(temp%2!=0){
-                    sb.append("#");
-                }else {
-                    sb.append(" ");
-                }
-                temp /=2;
-            }
-            answer[i] = sb.reverse().toString();
+
+            String binary = Integer.toBinaryString(arr1[i] | arr2[i]); 
+            String fullBinary = String.format("%" + n + "s", binary);
+            answer[i] = fullBinary.replace('1', '#').replace('0', ' ');
         }
         
         return answer;
