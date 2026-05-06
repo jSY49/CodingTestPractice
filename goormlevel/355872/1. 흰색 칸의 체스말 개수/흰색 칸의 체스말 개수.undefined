@@ -1,0 +1,23 @@
+import java.io.*;
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		int white = 0 ; 
+		
+		for(int i=0 ; i< 8 ; i++){
+			String input = br.readLine();
+
+			for (int j = 0; j < 8; j++) {
+                if ((i + j) % 2 == 0) {
+                    if (input.charAt(j) == '1') {
+                        white++;
+                    }
+                }
+            }
+				
+		}
+		
+		System.out.println(white);
+	}
+}
