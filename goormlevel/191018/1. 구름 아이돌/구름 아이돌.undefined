@@ -1,0 +1,30 @@
+import java.io.*;
+import java.util.*;
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int input = Integer.parseInt(br.readLine());
+		String grade = br.readLine();
+		StringTokenizer st = new StringTokenizer(grade);
+
+		ArrayList<Integer> intGrade = new ArrayList<>();
+		Map<Integer,Integer> map = new HashMap<>();
+		int idx=1; 
+		while(st.hasMoreTokens()){
+			String next = st.nextToken();
+			int value = Integer.parseInt(next);
+			map.put(value,idx++);
+			intGrade.add(value);	
+		}
+		intGrade.sort(Comparator.reverseOrder());
+
+		StringBuilder sb = new StringBuilder();
+		for(int i=0 ; i< 3; i++){
+			sb.append(map.get(intGrade.get(i)));
+
+			if(i<2) sb.append(" ");
+		}
+		
+		System.out.println(sb.toString());
+	}
+}
