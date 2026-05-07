@@ -1,0 +1,22 @@
+import java.io.*;
+import java.util.*;
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String input = br.readLine();
+		StringTokenizer st = new StringTokenizer(input);
+
+		int N = Integer.parseInt(st.nextToken());
+		String k = st.nextToken();
+
+		String[] array = br.readLine().split(" ");
+
+		int count = 0 ; 
+		for(String a : array){
+			if(!a.contains(k)){
+				count++;
+			}
+		}
+		System.out.println(count);
+	}
+}
