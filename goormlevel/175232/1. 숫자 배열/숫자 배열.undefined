@@ -1,0 +1,21 @@
+import java.io.*;
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int  input = Integer.parseInt(br.readLine());
+		int idx = 1; 
+		for(int i =0 ; i< input ; i++){
+			for(int k =0 ; k< input ; k++){
+				System.out.print(idx);
+				if (k < input - 1) {
+	                    System.out.print(" ");
+	                }
+				idx++;
+			}
+			System.out.println();
+		}
+	}
+}
+
+// 숫자배열 
+// 규칙, 한변의 길이 N / 0,0은 늘 1 / 배열값은 이동할 때마다 +1 / 이동방향 -> / 이동다하면 아래줄로 
