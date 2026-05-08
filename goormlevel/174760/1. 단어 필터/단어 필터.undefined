@@ -1,0 +1,27 @@
+import java.io.*;
+import java.util.*;
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String input = br.readLine();
+		StringTokenizer st = new StringTokenizer(input);
+		int sLength = Integer.parseInt(st.nextToken());
+		int eLength = Integer.parseInt(st.nextToken());
+		String S = br.readLine();
+		String E = br.readLine();
+
+		while (E.contains(S)) {
+            E = E.replace(S, "");
+		}
+		if(E.length() ==0 ) 
+			System.out.println("EMPTY");
+		else 
+			System.out.println(E);
+	}
+}
+
+
+// 전달 받은 E 
+// 특정단어 S 필터 
+// E에서 S 있으면 그거 제거하고 나머지만 전달. 
+// 대소문자도 모두 동일 
