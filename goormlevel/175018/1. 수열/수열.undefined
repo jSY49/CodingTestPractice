@@ -1,0 +1,24 @@
+import java.io.*;
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int input = Integer.parseInt(br.readLine());
+		int mod = 1_000_000_007;
+
+		if (input == 1) {
+            System.out.println(0);
+            return;
+		}
+
+		int[] dp = new int[input+1];
+		dp[0] = 0;
+		dp[1] = 0;
+		dp[2] = 1;
+		
+		for(int i = 3 ; i<= input;i++){
+			dp[i] = (dp[i-1] + dp[i-2])%mod;
+		}
+		
+		System.out.println(dp[input]);
+	}
+}
