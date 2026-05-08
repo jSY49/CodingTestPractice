@@ -1,0 +1,27 @@
+import java.io.*;
+import java.util.*;
+
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String input = br.readLine();
+		StringTokenizer st = new StringTokenizer(input);
+		int n  = Integer.parseInt(st.nextToken());
+		int m  = Integer.parseInt(st.nextToken());
+
+		HashSet<Integer> collectedCards = new HashSet<>();
+	     int result = -1; 
+        
+		 for (int i = 1; i <= m; i++) {
+			 int card = Integer.parseInt(br.readLine());
+			 collectedCards.add(card);
+			 
+			 if (collectedCards.size() == n) { //  모은 카드와 개수가 똑같으면 N종의 카드 모으기 성공
+	                result = i;  
+	                break;      
+	            }
+        }
+        
+        System.out.println(result);
+	}
+}
