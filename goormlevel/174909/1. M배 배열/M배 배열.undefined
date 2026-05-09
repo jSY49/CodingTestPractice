@@ -1,0 +1,26 @@
+import java.io.*;
+import java.util.*;
+ 
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String[] input = br.readLine().split(" ");
+		int M = Integer.parseInt(input[1]);
+		String[] array = br.readLine().split(" ");
+		StringBuilder sb = new StringBuilder();
+		
+		for(int i=0 ; i< array.length;i++){
+
+			int temp = Integer.parseInt(array[i]);
+
+			if(temp%M == 0){
+				sb.append(temp).append(" ");
+			}else {
+				sb.append(temp*M).append(" ");
+			}
+		}
+
+		System.out.println(sb.toString().trim());
+		
+	}
+}
