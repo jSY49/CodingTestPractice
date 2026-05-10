@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*; 
+
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int count = Integer.parseInt(br.readLine());
+
+		int maxIdx = 1; 
+		double max = 0 ;
+		int maxIdxW = 0; 
+		
+		for(int i =0 ; i< count ; i++){
+			String line = br.readLine();
+			StringTokenizer st = new StringTokenizer(line);
+			int w = Integer.parseInt(st.nextToken());
+			int v =Integer.parseInt(st.nextToken());
+
+			double density = (double)w/v; 
+			
+			if(max < density){ // 기본 , 밀도가 가장 높은 물질의 번호 출력 
+				max = density; 
+				maxIdx = i+1; 
+				maxIdxW = w; 
+			} else if (max == density){ // 밀도가 같다면 
+				if(maxIdxW < w){// 더 무거운 물질의 번호 
+					max = density; 
+					maxIdx = i+1; 
+					maxIdxW = w;
+				} else if( maxIdxW == w ){ // 무게도 같으면 그중 번호가 가장 작은 물질의 번호 
+					//이미 작은 번호 저장이니까 아무 작업도 안해도됨 
+				}
+			}
+		}
+
+		System.out.println(maxIdx);
+	}
+}
+
+// 밀도 = 무게 / 부피 
+// 밀도가 가장 높은 물질의 번호 출력 
+// 밀도가 같다면 그 중 더 무거운 물질 번호 
+// 밀도와 무게가 모두 같다면 그 중 번호가 가장 작은 물질의 번호 출력 
