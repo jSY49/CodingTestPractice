@@ -1,0 +1,38 @@
+import java.io.*;
+import java.util.*; 
+
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int cont = Integer.parseInt(br.readLine());
+		String line = br.readLine();
+		StringTokenizer st = new StringTokenizer(line);
+		//1. 한문제만 풀었을 때 최대값 찾기(max)
+		ArrayList<Integer> arr = new ArrayList<>();
+		int max = 0; 
+		while(st.hasMoreTokens()){
+
+			int temp = Integer.parseInt(st.nextToken());
+			arr.add(temp);
+			max = Math.max(max,temp); 
+			
+		}
+		
+		//2. max 값과 연속 된 문제 풀었을 때 최대값 비교
+		int serMax = arr.get(0);
+		int score = arr.get(0) ; 
+		for(int i =1 ; i< arr.size();i++){
+			if(arr.get(i-1)+1 == arr.get(i)){
+				score += arr.get(i);
+			}else {
+				serMax = Math.max(serMax,score); 
+				score= arr.get(i);
+			}
+		}
+
+		serMax = Math.max(serMax,score); 
+		
+		int result = Math.max(serMax,max);
+		System.out.println(result);
+	}
+}    
