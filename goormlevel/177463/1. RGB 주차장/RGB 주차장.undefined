@@ -1,0 +1,30 @@
+import java.io.*;
+class Main {
+	public static void main(String[] args) throws Exception {
+		int mod = 100_000_007;
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int input = Integer.parseInt(br.readLine());
+		long[] dp = new long[input+1];
+		dp[1] = 3;
+
+		for(int i=2; i<= input ;i++){
+			dp[i] = (dp[i-1]*2)%mod;
+		}
+
+		System.out.println(dp[input]);
+	}
+}
+
+/*
+n=1
+3
+
+n=2
+r gb
+g rb
+b rg
+6 
+
+n=3
+12 
+*/
