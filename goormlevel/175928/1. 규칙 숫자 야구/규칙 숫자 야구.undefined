@@ -1,0 +1,111 @@
+import java.io.*;
+import java.util.*;
+
+class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        // 입력 처리
+        String line1 = br.readLine();
+        String line2 = br.readLine();
+        if (line1 == null || line2 == null) return;
+
+        int[] answer = Arrays.stream(line1.split("")).mapToInt(Integer::parseInt).toArray();
+        int[] expectation = Arrays.stream(line2.split("")).mapToInt(Integer::parseInt).toArray();
+        int n = answer.length;
+
+        // 이미 정답인 경우
+        if (Arrays.equals(answer, expectation)) {
+            System.out.println(1);
+            return;
+        }
+
+        int count = 1;
+
+        while (!Arrays.equals(answer, expectation)) {
+            List<Integer> strikeIdx = new ArrayList<>();
+            boolean isBalled = false;
+
+            // 1. 전체 자리를 순회하며 Fail 처리 및 Ball 여부 확인
+            for (int i = 0; i < n; i++) {
+                // Strike 판정
+                if (expectation[i] == answer[i]) {
+                    strikeIdx.add(i);
+                    continue;
+                }
+
+                // Fail 판정
+                if (!contains(answer, expectation[i])) {
+                    int newNum = expectation[i];
+                    // 중복되지 않을 때까지 +1 반복
+                    while (contains(expectation, newNum)) {
+                        newNum = (newNum + 1) % 10;
+                    }
+                    expectation[i] = newNum;
+                    // Fail 처리를 하고 나면 다시 그 자리의 상태를 봐야 하므로 
+                    // Swift 코드의 continue와 동일하게 작동
+                    continue;
+                }
+
+                // 여기까지 왔다면 Ball인 상태
+                isBalled = true;
+            }
+
+            // 2. Ball이 하나라도 있었다면 스트라이크 제외하고 밀기
+            if (isBalled) {
+                List<Integer> strikes = new ArrayList<>();
+                for (int idx : strikeIdx) {
+                    strikes.add(expectation[idx]);
+                }
+
+                // 스트라이크가 아닌 값들만 모으기
+                List<Integer> nonStrikes = new ArrayList<>();
+                for (int i = 0; i < n; i++) {
+                    boolean isStrike = false;
+                    for (int sIdx : strikeIdx) {
+                        if (i == sIdx) {
+                            isStrike = true;
+                            break;
+                        }
+                    }
+                    if (!isStrike) {
+                        nonStrikes.add(expectation[i]);
+                    }
+                }
+
+                // 오른쪽으로 한 칸 밀기  
+                if (nonStrikes.size() > 0) {
+                    int last = nonStrikes.remove(nonStrikes.size() - 1);
+                    nonStrikes.add(0, last);
+                }
+
+                // 다시 합치기
+                int nonStrikePtr = 0;
+                for (int i = 0; i < n; i++) {
+                    boolean isStrike = false;
+                    for (int sIdx : strikeIdx) {
+                        if (i == sIdx) {
+                            isStrike = true;
+                            break;
+                        }
+                    }
+                    if (!isStrike) {
+                        expectation[i] = nonStrikes.get(nonStrikePtr++);
+                    }
+                }
+            }
+
+            count++;
+        }
+
+        System.out.println(count);
+    }
+
+    // 배열에 특정 값이 포함되어 있는지 확인 
+    public static boolean contains(int[] arr, int val) {
+        for (int i : arr) {
+            if (i == val) return true;
+        }
+        return false;
+    }
+}
