@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.*; 
+
+class Main {
+
+	//공식 : AM * BM = CM * DM 
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String input = br.readLine();
+		StringTokenizer st = new StringTokenizer(input);
+		int AM = Integer.parseInt(st.nextToken());
+		int CM = Integer.parseInt(st.nextToken());
+		int BM = Integer.parseInt(st.nextToken());
+		
+
+		int a = AM * BM; 
+		int b = CM; 
+
+		int gcd = gcd(a,b);
+		a = a/gcd;
+		b = b/gcd;
+
+		System.out.println(a+" "+b);
+	}
+
+	public static int gcd(int a , int b){
+
+		if(b == 0) return a ; 
+
+		return gcd(b , a%b);
+	}
+}
