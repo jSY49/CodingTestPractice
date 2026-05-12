@@ -1,0 +1,46 @@
+import java.io.*;
+import java.util.*; 
+
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String input = br.readLine();
+		StringTokenizer st = new StringTokenizer(input);
+		int N = Integer.parseInt(st.nextToken());
+		int D = Integer.parseInt(st.nextToken());
+
+		st = new StringTokenizer(br.readLine());
+		int[] point = new int[N];
+        for (int i = 0; i < N; i++) {
+            point[i] = Integer.parseInt(st.nextToken());
+        }
+        Arrays.sort(point);
+
+		int maxAnts = 0 ; 
+		int pointRight =0 ;
+		
+		for(int pointLeft =0 ; pointLeft< N; pointLeft++){
+
+			 while (pointRight < N && point[pointRight] - point[pointLeft] <= D) {
+                pointRight++;
+            }
+
+			int currentAnts = pointRight - pointLeft;
+            maxAnts = Math.max(maxAnts, currentAnts);
+            
+            if (pointRight == N) break;
+		}
+
+		System.out.println(N-maxAnts);
+		
+	}
+}
+
+/*
+개미 N 마리 
+지름 D 이하
+p1~n 위치들 
+출력 : 제거되는 개미의 수 
+...
+
+*/
