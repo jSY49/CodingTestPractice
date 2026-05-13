@@ -1,0 +1,29 @@
+import java.io.*;
+import java.util.*; 
+
+class Main {
+	// 소금물 농도 = 소금의 양/소금물의 양 *100 
+	// 소금 양 = (소금물 농도 * 소금물의 양 )/100
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String input = br.readLine();
+		StringTokenizer st = new StringTokenizer(input);
+
+		int N = Integer.parseInt(st.nextToken());
+		int M = Integer.parseInt(st.nextToken());
+
+		double salt = getSalt(N);
+
+		double newDensity = salt/(N+M) * 100; 
+			
+		double result = Math.floor(newDensity * 100) / 100.0;
+		System.out.printf("%.2f", result);
+	}
+
+	public static double getSalt(int saltWater){
+
+		double density = 7.0 ; 
+		return (density*saltWater)/100;
+		
+	} 
+}
