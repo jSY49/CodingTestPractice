@@ -1,0 +1,81 @@
+import java.io.*;
+import java.util.*;
+
+class Main {
+    static class Point {
+        int x, y;
+        Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        // --- 1. 첫 번째 동전 판 (A) 입력 받기 ---
+        st = new StringTokenizer(br.readLine());
+        int nA = Integer.parseInt(st.nextToken());
+        int mA = Integer.parseInt(st.nextToken());
+
+        List<Point> listA = new ArrayList<>();
+        for (int i = 0; i < nA; i++) {
+            String line = br.readLine();
+            for (int j = 0; j < mA; j++) {
+                if (line.charAt(j) == 'O') {
+                    listA.add(new Point(i, j));
+                }
+            }
+        }
+
+        // --- 2. 두 번째 동전 판 (B) 입력 받기 ---
+        st = new StringTokenizer(br.readLine());
+        int nB = Integer.parseInt(st.nextToken());
+        int mB = Integer.parseInt(st.nextToken());
+
+        List<Point> listB = new ArrayList<>();
+        for (int i = 0; i < nB; i++) {
+            String line = br.readLine();
+            for (int j = 0; j < mB; j++) {
+                if (line.charAt(j) == 'O') {
+                    listB.add(new Point(i, j));
+                }
+            }
+        }
+
+		int maxOverlap = 0 ; 
+
+		for(Point a : listA){
+			for(Point b : listB){
+
+				int dx = b.x - a.x;  
+				int dy = b.y - a.y;  
+
+				int overlapCount = getOverlap(listA, listB, dx,dy);
+				maxOverlap = Math.max(maxOverlap, overlapCount);
+			}
+		}
+
+		int answer = listA.size() - maxOverlap;
+		System.out.println(answer);
+    }
+
+	static public int getOverlap(List<Point> listA , List<Point> listB , int dx, int dy){
+		
+		int count = 0 ; 
+
+		for(Point a : listA){
+			int nx = a.x + dx ; 
+			int ny = a.y + dy ;
+
+			for (Point b : listB) {
+	            if (b.x == nx && b.y == ny) {
+	                count++;
+	                break; // 찾았으면 다음 A 동전 확인하러 가기
+	            }
+	        }
+		}
+		return count;
+	}
+}
