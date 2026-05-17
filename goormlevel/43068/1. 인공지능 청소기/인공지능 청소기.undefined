@@ -1,0 +1,26 @@
+import java.io.*;
+import java.util.*; 
+
+class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int testCase = Integer.parseInt(br.readLine());
+
+        for(int i = 0 ; i < testCase ; i++){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+
+            int X = Integer.parseInt(st.nextToken());
+            int Y = Integer.parseInt(st.nextToken());
+            int second = Integer.parseInt(st.nextToken());
+
+            int minDist = Math.abs(X) + Math.abs(Y);
+
+            // 거리가 시간보다 멀거나, (시간 - 거리)가 홀수면 절대 도달 불가!
+            if (minDist <= second && (second - minDist) % 2 == 0) {
+                System.out.println("YES");
+            } else {
+                System.out.println("NO");
+            }
+        }
+    }
+}
