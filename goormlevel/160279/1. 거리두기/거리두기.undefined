@@ -1,0 +1,30 @@
+import java.io.*;
+import java.util.*;
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int input = Integer.parseInt(br.readLine());
+		long[] dp = {1,1,1,1,1}; //무, 왼,중,우,왼우 
+		long mod = 100_000_007;
+		
+		for(int i = 2; i<= input ; i++){
+
+			long[] next = new long[5];
+
+			next[0]= (dp[0] + dp[1] + dp[2] + dp[3] + dp[4])% mod;
+			next[1]= (dp[0] + dp[2] + dp[3])% mod;
+			next[2]= (dp[0] + dp[1] + dp[3] + dp[4])% mod;
+			next[3]= (dp[0] + dp[1] + dp[2])% mod;
+			next[4]= (dp[0] + dp[2])% mod;
+
+			dp = next; 
+		}
+
+		long sum =0 ;
+		for(long temp : dp){
+			sum+=temp;
+		}
+
+		System.out.println(sum%mod);
+	}
+}
