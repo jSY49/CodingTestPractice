@@ -1,0 +1,40 @@
+import java.io.*;
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int input = Integer.parseInt(br.readLine());
+		int[] dp = new int[input+1];
+		dp[0] = 1; 
+		for(int i =1 ; i <= input ; i++ ){
+			int nFactorial = i*dp[i-1];	
+
+			while(nFactorial >10){
+				int sum = 0 ; 
+				int temp = nFactorial; 
+				while(temp != 0 ){
+
+					sum += temp%10;
+					temp /=10; 
+				
+				}
+				nFactorial = sum; 
+			}
+
+			dp[i] = nFactorial; 
+		}
+		
+		System.out.println(dp[input]);
+	}
+}
+
+/*
+0! = 1 
+1! = 1 
+2! = 2
+3! = 6 
+4! = 24 = 6 
+5! = 120 = 3 
+6! = 720 = 9 
+7! = 5040 = 9 
+8! = 40320 = 9 
+*/
