@@ -1,0 +1,54 @@
+import java.io.*;
+import java.util.*; 
+
+class Main {
+ 
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int count = Integer.parseInt(br.readLine());
+        String[] way = br.readLine().split("");
+        String[] points = br.readLine().split(" ");
+
+        Stack<String> stack = new Stack<>();
+        Map<String, Integer> map = new HashMap<>();
+        
+        int pointX = 0, pointY = 0;
+		String start = pointX + "," + pointY; // "0,0"
+		
+        stack.push(start);
+        map.put(start, 1);
+        
+        for (int i = 0; i < count; i++) {
+			
+            switch (way[i]) {
+                case "R": pointY++; break;
+                case "L": pointY--; break;
+                case "U": pointX--; break;
+                case "D": pointX++; break;
+            }
+
+            String current = pointX + "," + pointY;
+
+            int search = stack.search(current); 
+            if (search != -1) {
+                for (int k = 0; k < search; k++) {
+                    String a = stack.pop();
+                    map.remove(a); 
+                }
+            } 
+
+            stack.push(current);
+            map.put(current, Integer.parseInt(points[i]));
+        }
+
+        int sum = 0; 
+        while (!stack.isEmpty()) {
+            String a = stack.pop();
+            if (map.containsKey(a)) { 
+                sum += map.get(a); 
+            }
+        }
+
+        System.out.println(sum);
+    }
+}
