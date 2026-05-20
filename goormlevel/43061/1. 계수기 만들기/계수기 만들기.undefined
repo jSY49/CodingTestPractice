@@ -1,0 +1,47 @@
+import java.io.*;
+import java.util.*; 
+
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int input = Integer.parseInt(br.readLine());
+
+		String maxInput = br.readLine();
+		StringTokenizer st  = new StringTokenizer(maxInput);
+		int[] max = new int[input];
+		for(int i =0 ;i < input ; i++){
+			max[i] = Integer.parseInt(st.nextToken());
+		}
+
+		String tempInput = br.readLine();
+		int[] temp = new int[input];
+		st  = new StringTokenizer(tempInput);
+		for(int i =0 ;i < input ; i++){
+			temp[i] = Integer.parseInt(st.nextToken());
+		}
+		
+		int click = Integer.parseInt(br.readLine());
+
+		temp[input - 1] += click;
+
+        for (int i = input - 1; i >= 0; i--) {
+            
+            if (temp[i] > max[i]) {
+				
+                if (i == 0) {
+                    temp[i] = temp[i] % (max[i] + 1);
+                } else {
+
+					int carry = temp[i] / (max[i] + 1);
+                    temp[i] = temp[i] % (max[i] + 1);
+                    temp[i - 1] += carry;
+                }
+            }
+        }
+
+		for(int a : temp){
+			System.out.print(a);
+		}
+		System.out.println();
+	}
+}
