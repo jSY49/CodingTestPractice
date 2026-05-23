@@ -19,8 +19,9 @@ class Solution {
             
         }
         
-        for(int a : qu){
-            answer += Math.pow(a,2);
+        while(!qu.isEmpty()){
+            long a = qu.poll();
+            answer += a * a;  
         }
         return answer;
     }
