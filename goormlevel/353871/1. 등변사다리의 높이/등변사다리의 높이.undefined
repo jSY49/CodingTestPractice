@@ -1,0 +1,22 @@
+import java.io.*;
+import java.util.*; 
+
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String input = br.readLine();
+		StringTokenizer st = new StringTokenizer(input);
+
+		int K = Integer.parseInt(st.nextToken());
+		int D1 = Integer.parseInt(st.nextToken());
+		int D2 = Integer.parseInt(st.nextToken());
+
+		// (D2 - D1)/2 제곱 + 높이 제곱 = k제곱 
+		// 높이 제곱= k제곱 - (D2 - D1)/2 제곱
+		double W = (double)(D2 - D1) / 2.0;
+		double heightSquare = (K * K) - (W * W);
+
+		System.out.println((int)(heightSquare * 4));
+		
+	}
+}
