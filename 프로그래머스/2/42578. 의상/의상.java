@@ -1,19 +1,23 @@
-import java.util.*;
+import java.util.*; 
+
 class Solution {
     public int solution(String[][] clothes) {
-        int answer = 0;
+        int answer = 1;
         
         Map<String , Integer> map = new HashMap<>();
-        for(int i=0; i< clothes.length;i++){
-            map.put(clothes[i][1], map.getOrDefault(clothes[i][1], 0)+1);
+        for(String[] temp : clothes){
+            map.put(temp[1],map.getOrDefault(temp[1],0)+1);
         }
         
-        int num2 = 1;
+        // 입지 않는 경우 +1 
         for(String k : map.keySet()){
-            num2 *= (map.get(k) + 1);
-            System.out.println(map.get(k));
+             answer *= (map.get(k)+1);
         }
-        answer = num2-1;
-        return answer;
+        
+        //모두 입지 않는 경우 (하루에 최소 한 개의 의상은 입기 때문)
+        return answer-1;
     }
 }
+
+
+
